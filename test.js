@@ -1,1 +1,1 @@
-console.log('PR created!');
+console.log('PR template added!');
