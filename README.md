@@ -19,7 +19,7 @@ Please delete options that are not relevant and check the appropriate box:
 
 ---
 
-## 🔍 Implementation Details
+## Implementation Details
 Describe the implementation strategy and key changes:
 - **Components Updated:** List any UI components that have been modified.
 - **New Dependencies:** List any new libraries or dependencies added.
@@ -48,7 +48,7 @@ Please detail your testing approach:
 
 ---
 
-**Steps to Test:**
+## Steps to Test:
 1. Go to `...`
 2. Click on `...`
 3. Ensure `...` behaves as expected
