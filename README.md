@@ -28,7 +28,7 @@ Describe the implementation strategy and key changes:
 
 ---
 
-## 🖼️ Screenshots / UI Previews
+## Screenshots / UI Previews
 Include before and after screenshots or screen recordings if there are visual changes.
 
 | Before | After |
@@ -55,7 +55,7 @@ Please detail your testing approach:
 
 ---
 
-## 📋 Checklist
+## Checklist
 - [ ] Code follows the project's style guidelines.
 - [ ] Code is self-reviewed and well-documented.
 - [ ] All new and existing tests pass.
@@ -66,5 +66,5 @@ Please detail your testing approach:
 
 ---
 
-## 📚 Additional Context
+## Additional Context
 Provide any additional information that might help reviewers understand the context or decisions made:
