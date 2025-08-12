@@ -2,7 +2,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Swap quotes only when outer single quotes contain double quotes followed by $',
+      description: 'Swap quotes when outer single quotes contain "$variable" patterns',
     },
     fixable: 'code',
     schema: [],
@@ -14,22 +14,21 @@ module.exports = {
 
         const raw = context.getSourceCode().getText(node);
 
-        // Check outer single quotes
+        // Only check if outer quotes are single
         if (raw.startsWith("'") && raw.endsWith("'")) {
           const inner = raw.slice(1, -1);
 
-          // Match double quotes immediately followed by $
-          if (/\"\$/.test(inner)) {
-            // Replace inner double quotes with single quotes
-            const fixedInner = inner.replace(/"\$/g, "'$");
+          // Match only double quotes followed by $ and ending before another double quote
+          if (/\"\$[A-Za-z0-9_]+\"/.test(inner)) {
+            // Replace all "$var" → '$var'
+            const fixedInner = inner.replace(/"\$([A-Za-z0-9_]+)"/g, "'\$$1'");
 
-            // Swap outer single quotes to double quotes
+            // Swap outer quotes to double quotes
             const fixed = `"${fixedInner}"`;
 
             context.report({
               node,
-              message:
-                'Outer single quotes with inner double quotes followed by $ should be swapped',
+              message: 'Swap outer single quotes to double and "$var" to \'$var\' inside',
               fix(fixer) {
                 return fixer.replaceText(node, fixed);
               },
