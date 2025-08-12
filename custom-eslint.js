@@ -1,40 +1,51 @@
+// lib/rules/swap-quotes-precise.js
 module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Swap quotes when outer single quotes contain "$variable" patterns',
+      description: 'When outer quotes are single, convert inner "$var" -> \'$var\' and make outer quotes double',
     },
     fixable: 'code',
     schema: [],
   },
+
   create(context) {
+    const sourceCode = context.getSourceCode();
+
     return {
       Literal(node) {
+        // only process string literals
         if (typeof node.value !== 'string') return;
 
-        const raw = context.getSourceCode().getText(node);
+        const raw = sourceCode.getText(node); // includes the outer quotes as in source
 
-        // Only check if outer quotes are single
-        if (raw.startsWith("'") && raw.endsWith("'")) {
-          const inner = raw.slice(1, -1);
+        // proceed only if outer quotes are single quotes
+        if (!(raw.startsWith("'") && raw.endsWith("'"))) return;
 
-          // Match only double quotes followed by $ and ending before another double quote
-          if (/\"\$[A-Za-z0-9_]+\"/.test(inner)) {
-            // Replace all "$var" → '$var'
-            const fixedInner = inner.replace(/"\$([A-Za-z0-9_]+)"/g, "'\$$1'");
+        // inner content (raw slice keeps escape sequences as they are in source)
+        const inner = raw.slice(1, -1);
 
-            // Swap outer quotes to double quotes
-            const fixed = `"${fixedInner}"`;
+        // quick test: is there any pattern like "$...?"
+        if (!/\"\$[^"]+\"/.test(inner)) return;
 
-            context.report({
-              node,
-              message: 'Swap outer single quotes to double and "$var" to \'$var\' inside',
-              fix(fixer) {
-                return fixer.replaceText(node, fixed);
-              },
-            });
-          }
-        }
+        // Replace all occurrences of "$..." with '$...' using a callback
+        const fixedInner = inner.replace(/"\$([^"]+)"/g, function (_, varName) {
+          // varName is the text after the $ up to the next double-quote
+          // Build replacement explicitly to avoid $1 replacement pitfalls
+          return "'" + "$" + varName + "'";
+        });
+
+        // Final literal with swapped outer quotes
+        const fixed = '"' + fixedInner + '"';
+
+        context.report({
+          node,
+          message:
+            'Swap outer single quotes to double and convert inner "$var" to \'$var\'',
+          fix(fixer) {
+            return fixer.replaceText(node, fixed);
+          },
+        });
       },
     };
   },
