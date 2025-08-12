@@ -2,7 +2,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Swap quotes only for test descriptions in it()',
+      description:
+        'Swap outer double quotes to single quotes, and inner single quotes to double quotes only when inner contains $variable',
     },
     fixable: 'code',
     schema: [],
@@ -12,34 +13,31 @@ module.exports = {
       Literal(node) {
         if (typeof node.value !== 'string') return;
 
-        // Check if parent is an `it()` call
-        if (
-          node.parent &&
-          node.parent.type === 'CallExpression' &&
-          node.parent.callee.name === 'it' &&
-          node.parent.arguments[0] === node
-        ) {
-          const raw = context.getSourceCode().getText(node);
+        const raw = context.getSourceCode().getText(node);
 
-          // Only process if outer quotes are double
-          if (raw.startsWith('"') && raw.endsWith('"')) {
-            const inner = raw.slice(1, -1);
+        // Check outer double quotes
+        if (raw.startsWith('"') && raw.endsWith('"')) {
+          const inner = raw.slice(1, -1);
 
-            // Replace inner single quotes with double quotes
-            const fixedInner = inner.replace(/'/g, '"');
+          // Match single-quoted $variable inside
+          const singleQuotedDollarVar = /'\$[a-zA-Z0-9_]+/.test(inner);
 
-            // Build final string with outer single quotes
-            const fixed = `'${fixedInner}'`;
+          if (!singleQuotedDollarVar) return; // Skip if no match
 
-            context.report({
-              node,
-              message:
-                'Swap outer quotes to single and inner quotes to double in it() descriptions',
-              fix(fixer) {
-                return fixer.replaceText(node, fixed);
-              },
-            });
-          }
+          // Replace only inner single quotes with double quotes
+          const fixedInner = inner.replace(/'(\$[a-zA-Z0-9_]+)'/g, '"$1"');
+
+          // Wrap final string in single quotes
+          const fixed = `'${fixedInner}'`;
+
+          context.report({
+            node,
+            message:
+              'Swap outer quotes to single and inner quotes to double for $variable placeholders',
+            fix(fixer) {
+              return fixer.replaceText(node, fixed);
+            },
+          });
         }
       },
     };
