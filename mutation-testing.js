@@ -1,27 +1,28 @@
-// npm install --save-dev @stryker-mutator/core @stryker-mutator/jest-runner typescript ts-jest
+{
+  "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker/master/packages/core/schema/stryker-schema.json",
+  "testRunner": "jest",
+  "mutate": [
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.test.{ts,tsx}",
+    "!src/**/*.spec.{ts,tsx}",
+    "!src/tests/**",
+    "!src/main.tsx",
+    "!src/vite-env.d.ts"
+  ],
+  "reporters": ["progress", "clear-text", "html"],
+  "coverageAnalysis": "off",
+  "timeoutMS": 60000,
+  "concurrency": 4,
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.js"
+  },
+  "checkers": ["typescript"],
+  "tsconfigFile": "tsconfig.test.json",
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": 0
+  }
+}
 
-module.exports = function(config) {
-  config.set({
-    mutator: {
-      name: 'typescript',
-      excludedMutations: ['BooleanSubstitution'] // optional tuning
-    },
-    packageManager: 'npm',
-    reporters: ['progress', 'clear-text', 'html'],
-    testRunner: 'jest',
-    jest: {
-      projectType: 'custom',
-      config: require('./jest.config.js')
-    },
-    mutate: ['src/**/*.{ts,tsx}', '!src/**/*.test.{ts,tsx}', '!src/**/index.{ts,tsx}'],
-    concurrency: Math.max(1, Math.floor(require('os').cpus().length / 2)),
-    timeoutMS: 600000,
-    coverageAnalysis: 'perTest', // or 'off' for faster but less precise results,
-    //////////
-    coverageAnalysis: 'perTest',
-    concurrency: Math.max(1, Math.floor(require('os').cpus().length / 2)),
-    timeoutMS: 300000, // 5 mins per mutant
-    maxConcurrentTestRunners: 4, // helps throttle test spawns
-    disableTypeChecks: true, // skips TS re-typechecking on each mutant (major speed gain)
-  });
-};
