@@ -1,0 +1,12 @@
+    /* Target the column header label container */
+    .ag-header-cell-label {
+        display: flex; /* Ensure flexbox is used */
+        flex-direction: row-reverse; /* Reverses the order of items within the flex container */
+        align-items: center; /* Vertically align items */
+    }
+
+    /* Adjust margins or padding if needed for spacing between icon and text */
+    .ag-header-cell-label .ag-icon { /* Replace .ag-icon with the actual class for sort icons */
+        margin-left: 5px; /* Add some space to the left of the icon */
+        margin-right: 0; /* Remove any default right margin */
+    }
