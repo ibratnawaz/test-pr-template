@@ -84,3 +84,56 @@ export const CustomHeader = (props) => {
   );
 };
 
+
+/////////////////
+
+
+
+import React from 'react';
+import { IHeaderParams } from 'ag-grid-community';
+import { IHeaderReactComp } from 'ag-grid-react';
+
+interface CustomHeaderProps extends IHeaderParams {
+  enableSorting: boolean;
+  displayName: string;
+  setSort: (sort: 'asc' | 'desc' | null, multiSort: boolean) => void;
+}
+
+export const CustomHeader: React.FC<CustomHeaderProps & IHeaderReactComp> = (props) => {
+  const { displayName, enableSorting, column, setSort } = props;
+
+  const currentSort = column.getSort(); // 'asc' | 'desc' | null
+
+  const handleSort = (order: 'asc' | 'desc') => {
+    setSort(order, false); // false = not multi-sort
+  };
+
+  const renderSortIcons = () => {
+    if (!enableSorting) return null;
+
+    return (
+      <div style={{ marginRight: 6, cursor: 'pointer', display: 'flex', flexDirection: 'column' }}>
+        <span
+          onClick={() => handleSort('asc')}
+          style={{ color: currentSort === 'asc' ? 'blue' : '#ccc', fontSize: 12 }}
+        >
+          ▲
+        </span>
+        <span
+          onClick={() => handleSort('desc')}
+          style={{ color: currentSort === 'desc' ? 'blue' : '#ccc', fontSize: 12 }}
+        >
+          ▼
+        </span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="ag-custom-header" style={{ display: 'flex', alignItems: 'center' }}>
+      {renderSortIcons()}
+      <span>{displayName}</span>
+    </div>
+  );
+};
+
