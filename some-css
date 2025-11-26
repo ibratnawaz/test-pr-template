@@ -10,3 +10,20 @@
         margin-left: 5px; /* Add some space to the left of the icon */
         margin-right: 0; /* Remove any default right margin */
     }
+
+
+
+
+const gridOptions = {
+  icons: {
+    sortAscending: 
+      `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
+         <path d="M0 6 L4 2 L8 6 Z" fill="currentColor"/>
+       </svg>`,
+    sortDescending: 
+      `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
+         <path d="M0 2 L4 6 L8 2 Z" fill="currentColor"/>
+       </svg>`
+  }
+};
+// Then initialize the grid with these options...
