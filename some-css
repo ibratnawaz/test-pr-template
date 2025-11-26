@@ -11,6 +11,14 @@
         margin-right: 0; /* Remove any default right margin */
     }
 
+.ag-header-cell-label {
+  white-space: normal;
+  line-height: 1.2;
+}
+.ag-header-cell-text {
+  word-break: break-word;
+}
+
 
 
 
