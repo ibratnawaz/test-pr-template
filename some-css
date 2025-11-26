@@ -16,6 +16,11 @@
 
 const gridOptions = {
   icons: {
+sortUnSort: `
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="gray">
+        <path d="M7 14l5-5 5 5H7z"/>
+      </svg>
+    `,
     sortAscending: 
       `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
          <path d="M0 6 L4 2 L8 6 Z" fill="currentColor"/>
