@@ -40,3 +40,47 @@ sortUnSort: `
   }
 };
 // Then initialize the grid with these options...
+
+
+
+
+import React from "react";
+
+export const CustomHeader = (props) => {
+  const { displayName, enableSorting, menuIcon, showColumnMenu, column, setSort } = props;
+
+  const onSortRequested = (order) => {
+    setSort(order, false); // don't multi-sort
+  };
+
+  const currentSort = column.getSort();
+
+  const renderSortIcon = () => {
+    if (!enableSorting) return null;
+
+    return (
+      <div className="custom-sort-icons mr-1">
+        <span
+          onClick={() => onSortRequested("asc")}
+          style={{ color: currentSort === "asc" ? "blue" : "#ccc", cursor: "pointer" }}
+        >
+          ▲
+        </span>
+        <span
+          onClick={() => onSortRequested("desc")}
+          style={{ color: currentSort === "desc" ? "blue" : "#ccc", cursor: "pointer", marginLeft: 2 }}
+        >
+          ▼
+        </span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="ag-custom-header flex items-center">
+      {renderSortIcon()}
+      <span>{displayName}</span>
+    </div>
+  );
+};
+
