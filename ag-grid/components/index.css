@@ -1,0 +1,243 @@
+.funds-grid-container {
+  width: 100vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+}
+
+.grid-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.grid-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.ag-theme-custom {
+  --ag-font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
+  --ag-font-size: 14px;
+  --ag-header-height: 48px;
+  --ag-row-height: 48px;
+  --ag-header-foreground-color: #6b7280;
+  --ag-header-background-color: #ffffff;
+  --ag-odd-row-background-color: #ffffff;
+  --ag-background-color: #ffffff;
+  --ag-border-color: #e5e7eb;
+  --ag-row-border-color: #e5e7eb;
+  --ag-header-column-separator-display: none;
+  --ag-cell-horizontal-padding: 16px;
+}
+
+.ag-theme-custom .ag-root-wrapper {
+  border: none;
+}
+
+.ag-theme-custom .ag-header {
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.ag-theme-custom .ag-header-cell {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.ag-theme-custom .ag-header-cell-text {
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.ag-theme-custom .ag-row {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.ag-theme-custom .ag-row:hover {
+  background-color: #f9fafb;
+}
+
+.ag-theme-custom .ag-cell {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.ag-theme-custom .name-cell {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.ag-theme-custom .category-cell {
+  color: #2563eb;
+}
+
+.ag-theme-custom .asset-class-cell {
+  color: #2563eb;
+}
+
+.ag-theme-custom .ag-checkbox-input-wrapper {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  background: white;
+}
+
+.ag-theme-custom .ag-checkbox-input-wrapper.ag-checked {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.ag-theme-custom .ag-checkbox-input-wrapper.ag-checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.ag-theme-custom .ag-icon-menu {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.ag-theme-custom .ag-icon-filter {
+  color: #2563eb;
+}
+
+.ag-theme-custom .ag-header-cell-menu-button {
+  width: 24px;
+}
+
+.ag-theme-custom .ag-sort-ascending-icon,
+.ag-theme-custom .ag-sort-descending-icon {
+  color: #1f2937;
+}
+
+.ag-theme-custom .ag-header-icon {
+  color: #6b7280;
+}
+
+.equity-sector-filter {
+  padding: 0;
+  min-width: 240px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.filter-option:hover {
+  background-color: #f3f4f6;
+}
+
+.filter-option input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  background: white;
+  margin-right: 12px;
+  transition: all 0.15s ease;
+}
+
+.filter-option input[type='checkbox']:checked ~ .checkbox-custom {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.filter-option input[type='checkbox']:checked ~ .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #1f2937;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.ag-theme-custom .ag-popup {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.ag-theme-custom .ag-menu {
+  background: white;
+  border-radius: 6px;
+  padding: 4px 0;
+}
+
+.ag-theme-custom .ag-tabs-header {
+  display: none;
+}
+
+.ag-theme-custom .ag-filter-toolpanel-header {
+  display: none;
+}
+
+.ag-theme-custom .ag-filter {
+  padding: 0;
+}
+
+.ag-theme-custom .ag-filter-body-wrapper {
+  padding: 0;
+}
+
+.ag-theme-custom .ag-header-cell-filtered {
+  background-color: transparent;
+}
+
+.ag-theme-custom .ag-icon-menu::before {
+  content: '☰';
+  font-size: 14px;
+}
